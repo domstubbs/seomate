@@ -21,6 +21,7 @@ use craft\helpers\UrlHelper;
 use Illuminate\Support\Collection;
 use vaersaagod\seomate\models\Settings;
 use vaersaagod\seomate\SEOMate;
+use benf\neo\elements\db\BlockQuery as NeoBlockQuery;
 
 /**
  * SEOMate Helper
@@ -178,7 +179,7 @@ class SEOMateHelper
             }
 
             // Fetch the blocks
-            if ($value instanceof MatrixBlockQuery) {
+            if ($value instanceof MatrixBlockQuery || $value instanceof NeoBlockQuery) {
                 $query = (clone $value)->type($blockTypeHandle);
                 if ($type === 'image') {
                     $query->with([sprintf('%s:%s', $blockTypeHandle, $subFieldHandle)]);
