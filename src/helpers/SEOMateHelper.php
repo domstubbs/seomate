@@ -28,6 +28,8 @@ use vaersaagod\seomate\SEOMate;
 
 use yii\base\InvalidConfigException;
 
+use benf\neo\elements\db\BlockQuery as NeoBlockQuery;
+
 /**
  * SEOMate Helper
  *
@@ -232,7 +234,7 @@ class SEOMateHelper
             }
 
             // Fetch the blocks
-            if ($value instanceof EntryQuery) {
+            if ($value instanceof EntryQuery || $value instanceof NeoBlockQuery) {
                 $query = (clone $value)->type($blockTypeHandle);
                 if ($type === 'image') {
                     $query->with([sprintf('%s:%s', $blockTypeHandle, $subFieldHandle)]);
